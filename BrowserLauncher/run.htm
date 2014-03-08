@@ -1,0 +1,54 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"> 
+<HTML>
+<HEAD>
+<TITLE>War Inc Battlezone launcher</TITLE>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta name="description" content="A perfect game">
+</HEAD>
+<BODY>
+
+<span id="browser"></span>
+<br><br>
+<div id="applet"></div>
+
+<script type="text/javascript"> 
+
+	document.getElementById("browser").innerHTML = "Browser: " + navigator.userAgent;
+	
+	if(navigator.userAgent.indexOf("MSIE")!=-1)
+        document.getElementById("applet").innerHTML = "<OBJECT width=40 height=20 \
+            id='WarIncLauncher' \
+            CLASSID='CLSID:64F2ECD6-505E-4A9A-9606-4727B70DF3E9' \
+            CODEBASE='WarIncLaunch_1_0_0_5.cab#Version=1,0,0,4'> \
+            <PARAM NAME='cmdLine' VALUE=''> \
+        </OBJECT>";
+	else
+	if(navigator.userAgent.indexOf("Firefox")!=-1)
+	    document.getElementById("applet").innerHTML = "<embed type='application/npwiu' pluginspage='npwiu.xpi' width=40 height=20>";
+	else
+	{
+	    //if(navigator.userAgent.indexOf("Opera")!=-1)    alert("Opera");
+	    //if(navigator.userAgent.indexOf("Chrome")!=-1)   alert("Chrome");
+        document.getElementById("applet").innerHTML = "<span style='color:red; font-size:larger;'>Incompatible browser</span><br> \
+            please, download <A href='https://s3.amazonaws.com/cdn.thewarinc.com/Install/WarInc_WebSetup.exe'>installer</A> manually<br> \
+            or launch the game by shortcut";
+    }
+
+    function go()
+    {
+        var cmdln = "-login " + document.getElementById("login").value + " -pwd " + document.getElementById("pwd").value;
+	    if(navigator.userAgent.indexOf("MSIE")!=-1)
+            document.getElementById("WarIncLauncher").cmdLine = cmdln;
+        else if(navigator.userAgent.indexOf("Firefox")!=-1)
+    	    document.getElementById("applet").innerHTML = 
+    	        "<embed type='application/npwiu' pluginspage='npwiu.xpi' width=40 height=20 cmdLine='" + cmdln + "'>";
+	    else
+	        document.getElementById("applet").innerHTML = "Unsupported browser";
+	}
+    
+</script>
+<input style="align:left; width:100px;" type="input" id="login" value="login">
+<input style="align:left; width:100px;" type="input" id="pwd" value="password">
+<div onclick="go()">Press this text to launch the game with login:password</div>
+</BODY>
+</HTML>

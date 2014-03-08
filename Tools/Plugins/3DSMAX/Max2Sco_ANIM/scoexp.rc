@@ -1,0 +1,195 @@
+//Microsoft Developer Studio generated resource script.
+//
+#include "resource.h"
+
+#define APSTUDIO_READONLY_SYMBOLS
+/////////////////////////////////////////////////////////////////////////////
+//
+// Generated from the TEXTINCLUDE 2 resource.
+//
+#include "afxres.h"
+
+/////////////////////////////////////////////////////////////////////////////
+#undef APSTUDIO_READONLY_SYMBOLS
+
+/////////////////////////////////////////////////////////////////////////////
+// English (U.S.) resources
+
+#if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_ENU)
+#ifdef _WIN32
+LANGUAGE LANG_ENGLISH, SUBLANG_ENGLISH_US
+#pragma code_page(1252)
+#endif //_WIN32
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// DESIGNINFO
+//
+
+#ifdef APSTUDIO_INVOKED
+GUIDELINES DESIGNINFO DISCARDABLE 
+BEGIN
+    IDD_ABOUTBOX, DIALOG
+    BEGIN
+        LEFTMARGIN, 1
+        RIGHTMARGIN, 171
+        TOPMARGIN, 1
+        BOTTOMMARGIN, 96
+    END
+
+    IDD_ETERNITYEXPORT_DLG, DIALOG
+    BEGIN
+        RIGHTMARGIN, 149
+        VERTGUIDE, 5
+        VERTGUIDE, 12
+        VERTGUIDE, 50
+        VERTGUIDE, 86
+        VERTGUIDE, 149
+        HORZGUIDE, 5
+    END
+END
+#endif    // APSTUDIO_INVOKED
+
+
+#ifdef APSTUDIO_INVOKED
+/////////////////////////////////////////////////////////////////////////////
+//
+// TEXTINCLUDE
+//
+
+1 TEXTINCLUDE DISCARDABLE 
+BEGIN
+    "resource.h\0"
+END
+
+2 TEXTINCLUDE DISCARDABLE 
+BEGIN
+    "#include ""afxres.h""\r\n"
+    "\0"
+END
+
+3 TEXTINCLUDE DISCARDABLE 
+BEGIN
+    "\r\n"
+    "\0"
+END
+
+#endif    // APSTUDIO_INVOKED
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Dialog
+//
+
+IDD_ABOUTBOX DIALOGEX 0, 0, 172, 98
+STYLE DS_MODALFRAME | WS_POPUP | WS_CAPTION
+CAPTION "Eternity Tools: Static Mesh Exporter"
+FONT 8, "MS Sans Serif", 0, 0, 0x1
+BEGIN
+    DEFPUSHBUTTON   "OK",IDOK,1,82,170,14,0,WS_EX_STATICEDGE
+    CTEXT           "Eternity Static Mesh Exporter\nVersion 3.0\nCopyright 1999-2001 TS Group Entertainment LLC\n http://www.tsgroup-inc.com",
+                    IDC_STATIC,1,1,170,76,SS_SUNKEN
+END
+
+IDD_ETERNITYEXPORT_DLG DIALOG DISCARDABLE  0, 0, 155, 277
+STYLE DS_MODALFRAME | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "Eternity Export Options"
+FONT 8, "MS Sans Serif"
+BEGIN
+    CONTROL         "Cameras",IDC_CAMERA,"Button",BS_AUTOCHECKBOX | 
+                    WS_TABSTOP,86,29,43,10
+    CONTROL         "Lights",IDC_LIGHT,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,
+                    86,42,35,10
+    CONTROL         "Full Scene",IDC_SCENE,"Button",BS_AUTOCHECKBOX | 
+                    WS_TABSTOP,12,18,60,10
+    CONTROL         "Materials",IDC_MATERIAL,"Button",BS_AUTOCHECKBOX | 
+                    WS_TABSTOP,20,42,61,10
+    CONTROL         "             Export vertex colors",IDC_VERTEXCOLORS,
+                    "Button",BS_AUTOCHECKBOX | WS_TABSTOP,12,194,104,10
+    DEFPUSHBUTTON   "Convert !",IDOK,5,259,81,13
+    PUSHBUTTON      "Cancel",IDCANCEL,99,258,50,14
+    CONTROL         "",IDC_STATIC_FRAME,"CustEdit",WS_TABSTOP,86,157,25,10
+    GROUPBOX        "Output Options",IDC_STATIC,5,5,137,129
+    GROUPBOX        "Mesh output options",IDC_STATIC,5,181,143,63
+    CONTROL         "",IDC_STATIC_FRAME_SPIN,"SpinnerControl",0x0,112,157,7,
+                    10
+    LTEXT           "Export Frame #:",IDC_STATIC,12,158,67,8
+    GROUPBOX        "Static Output Timing",IDC_STATIC,5,141,144,33
+    CONTROL         "",IDC_VERT_PREC,"CustEdit",WS_TABSTOP,12,210,25,10
+    CONTROL         "",IDC_VERT_PREC_SPIN,"SpinnerControl",0x0,38,210,7,10
+    LTEXT           "Geometry precision",IDC_STATIC,50,211,67,8
+    CONTROL         "",IDC_UV_PREC,"CustEdit",WS_TABSTOP,12,226,25,10
+    CONTROL         "",IDC_UV_PREC_SPIN,"SpinnerControl",0x0,38,226,7,10
+    LTEXT           "Textute UV precision",IDC_STATIC,50,227,83,8
+    CONTROL         "Export Animation Path",IDC_ANIMPATH,"Button",
+                    BS_AUTOCHECKBOX | WS_TABSTOP,12,56,94,10
+    CONTROL         "Export to Binary format",IDC_ISBINARY,"Button",
+                    BS_AUTOCHECKBOX | WS_TABSTOP,12,117,94,10
+    CONTROL         "Objects",IDC_MESHDATA,"Button",BS_AUTOCHECKBOX | 
+                    WS_TABSTOP,20,29,60,10
+    CONTROL         "Export Animated Mesh",IDC_ANIMMESH,"Button",
+                    BS_AUTOCHECKBOX | WS_TABSTOP,12,70,94,10
+END
+
+
+#ifndef _MAC
+/////////////////////////////////////////////////////////////////////////////
+//
+// Version
+//
+
+VS_VERSION_INFO VERSIONINFO
+ FILEVERSION 3,0,0,0
+ PRODUCTVERSION 3,0,0,0
+ FILEFLAGSMASK 0x3fL
+#ifdef _DEBUG
+ FILEFLAGS 0x1L
+#else
+ FILEFLAGS 0x0L
+#endif
+ FILEOS 0x40004L
+ FILETYPE 0x2L
+ FILESUBTYPE 0x0L
+BEGIN
+    BLOCK "StringFileInfo"
+    BEGIN
+        BLOCK "040904b0"
+        BEGIN
+            VALUE "Comments", "Static Scene Exporter\0"
+            VALUE "CompanyName", "TS Group Entertainment LLC\0"
+            VALUE "FileDescription", "SCO Static Mesh file exporter (plugin)\0"
+            VALUE "FileVersion", "3.0.0.0\0"
+            VALUE "InternalName", "SCOExport\0"
+            VALUE "LegalCopyright", "Copyright © 1999 TS Group Entertainment LLc\0"
+            VALUE "LegalTrademarks", "The following are trademarks of TS Group Entertainment LLC: Eternity, SCO, Graphite\0"
+            VALUE "OriginalFilename", "scoexport.dle\0"
+            VALUE "PrivateBuild", "\0"
+            VALUE "ProductName", "3D Studio MAX\0"
+            VALUE "ProductVersion", "3.0.0.0\0"
+            VALUE "SpecialBuild", "\0"
+        END
+    END
+    BLOCK "VarFileInfo"
+    BEGIN
+        VALUE "Translation", 0x409, 1200
+    END
+END
+
+#endif    // !_MAC
+
+#endif    // English (U.S.) resources
+/////////////////////////////////////////////////////////////////////////////
+
+
+
+#ifndef APSTUDIO_INVOKED
+/////////////////////////////////////////////////////////////////////////////
+//
+// Generated from the TEXTINCLUDE 3 resource.
+//
+
+
+/////////////////////////////////////////////////////////////////////////////
+#endif    // not APSTUDIO_INVOKED
+

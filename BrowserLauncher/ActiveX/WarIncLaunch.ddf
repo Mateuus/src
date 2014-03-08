@@ -1,0 +1,11 @@
+.OPTION EXPLICIT
+ 
+.Set CabinetNameTemplate=WarIncLaunch_1_0_0_9.cab
+.Set MaxDiskSize=CDROM
+.Set DiskDirectory1=.\
+ 
+.Set Cabinet=on
+.Set Compress=on
+
+Release/WarIncLaunch.dll
+WarIncLaunch.inf

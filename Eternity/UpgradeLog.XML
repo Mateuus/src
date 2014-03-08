@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?><?xml-stylesheet type='text/xsl' href='_UpgradeReport_Files/UpgradeReport.xslt'?><UpgradeLog>
+<Properties><Property Name="Solution" Value="Eternity">
+</Property><Property Name="Solution File" Value="D:\WarZ - Files\Server\Warinc\src\Eternity\Eternity.sln">
+</Property><Property Name="User Options File" Value="D:\WarZ - Files\Server\Warinc\src\Eternity\Eternity.suo">
+</Property><Property Name="Date" Value="Donnerstag, 13. Dezember 2012">
+</Property><Property Name="Time" Value="22:18">
+</Property></Properties><Event ErrorLevel="0" Project="" Source="Eternity.sln" Description="File successfully backed up as D:\WarZ - Files\Server\Warinc\src\Eternity\Eternity.sln.old">
+</Event><Event ErrorLevel="0" Project="" Source="Eternity.suo" Description="File successfully backed up as D:\WarZ - Files\Server\Warinc\src\Eternity\Eternity.suo.old">
+</Event><Event ErrorLevel="0" Project="Eternity" Source="Eternity.vcproj" Description="Project upgraded successfully.">
+</Event><Event ErrorLevel="3" Project="Eternity" Source="Eternity.vcproj" Description="Converted">
+</Event><Event ErrorLevel="0" Project="" Source="Eternity.sln" Description="Solution converted successfully">
+</Event><Event ErrorLevel="3" Project="" Source="Eternity.sln" Description="Converted">
+</Event></UpgradeLog>
