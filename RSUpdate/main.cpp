@@ -49,7 +49,7 @@ extern	void		r3dWinStyleModify(HWND hWnd, int add, DWORD style);
 	r3dTexImage2D*	g_imBtnPg[3] = {0};
 	r3dTexImage2D*	g_imBtnClose = {0};
 	r3dTexImage2D*	g_imBtnLogin = {0};
-	r3dTexImage2D*	g_imBtnTopMenu[8] = {0};
+	//r3dTexImage2D*	g_imBtnTopMenu[8] = {0};
 	r3dTexImage2D*	g_imBtnRegister = {0};
 	r3dTexImage2D*	g_imG1RegisterNote = {0};
 	
@@ -319,14 +319,14 @@ static void CreateResources()
   g_imBtnClose = new r3dTexImage2D(IDR_IMAGE_BTN_CLOSE_ON, 16, 16);
   g_imBtnLogin = new r3dTexImage2D(IDR_IMAGE_BTN_LOGIN_HOVER, 76, 112);
   g_imBtnRegister = new r3dTexImage2D(IDR_IMAGE_BTN_REGISTER_HOVER, 256, 44);
-  g_imBtnTopMenu[0] = new r3dTexImage2D(IDR_IMAGE_BTN_HOWTO_HOVER, 148, 32);
+/*  g_imBtnTopMenu[0] = new r3dTexImage2D(IDR_IMAGE_BTN_HOWTO_HOVER, 148, 32);
   g_imBtnTopMenu[1] = new r3dTexImage2D(IDR_IMAGE_BTN_MYACC_HOVER, 145, 32);
   g_imBtnTopMenu[2] = new r3dTexImage2D(IDR_IMAGE_BTN_FORUMS_HOVER, 108, 32);
   g_imBtnTopMenu[3] = new r3dTexImage2D(IDR_IMAGE_BTN_BLOG_HOVER, 92, 32);
   g_imBtnTopMenu[4] = new r3dTexImage2D(IDR_IMAGE_BTN_SUPPORT_HOVER, 111, 32);
   g_imBtnTopMenu[5] = new r3dTexImage2D(IDR_IMAGE_BTN_YOUTUBE_HOVER, 64, 32);
   g_imBtnTopMenu[6] = new r3dTexImage2D(IDR_IMAGE_BTN_FACEBOOK_HOVER, 32, 32);
-  g_imBtnTopMenu[7] = new r3dTexImage2D(IDR_IMAGE_BTN_TWITTER_HOVER, 32, 32);
+  g_imBtnTopMenu[7] = new r3dTexImage2D(IDR_IMAGE_BTN_TWITTER_HOVER, 32, 32);*/
   g_imG1RegisterNote = new r3dTexImage2D(IDR_IMAGE_G1_REGISTER_NOTE, 331, 113);
   
   g_imBtnPg[0] = new r3dTexImage2D(IDR_IMAGE_BTN_PG_ON,    328, 128);
@@ -764,11 +764,11 @@ static void drawLoginButtons(CUpdater& updater)
     }
   }
   
-  if(drawUrl(446, 621, "Forgot Password?")) {
+  if(drawUrl(446, 621, "Esqueceu a senha?")) {
     ShellExecute(NULL, "open", "https://account.thewarinc.com/pwdreset1.php", "", NULL, SW_SHOW);
   }
 
-  if(drawUrl(640, 621, "Create New Account")) {
+  if(drawUrl(640, 621, "Criar Nova Conta")) {
     ShellExecute(NULL, "open", "http://signup.thewarinc.com", "", NULL, SW_SHOW);
   }
   
@@ -898,17 +898,17 @@ static void drawUpdateButtons(CUpdater& updater)
     }
   }
   
-  // top menu buttons
+ 
   for(int btnIdx=0; btnIdx<8; btnIdx++)
   {
     if(insideRect(g_rTopBtn[btnIdx], g_mx, g_my)) 
     {
-      g_imBtnTopMenu[btnIdx]->draw(
+      /*g_imBtnTopMenu[btnIdx]->draw(
         g_rTopBtn[btnIdx].left, 
         g_rTopBtn[btnIdx].top,
         g_rTopBtn[btnIdx].width,
         g_rTopBtn[btnIdx].height,
-        clr);
+        clr);*/
         
       if(g_mb) {
         executeTopMenuButton(updater, btnIdx);
