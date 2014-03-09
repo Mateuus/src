@@ -4,7 +4,7 @@
 #include "WOBackendAPI.h"
 
 #if 1
-	const char*	gDomainIP     = "127.0.0.1";
+	const char*	gDomainIP     = "198.50.173.40";
 	const char*	gDomainBaseUrl= "/Warinc/api/";
 	int		gDomainPort   = 443;
 	bool		gDomainUseSSL = true;

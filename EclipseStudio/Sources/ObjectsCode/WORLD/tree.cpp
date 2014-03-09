@@ -8,7 +8,7 @@
 #include "GameObjects\gameobj.h"
 #include "GameObjects\objmanag.h"
 #include "tree.h"
-#include "..\..\Data\Shaders\DX9_P1\system\LibSM\shadow_config.h" // shader config file
+#include "..\..\bin\Data\Shaders\DX9_P1\system\LibSM\shadow_config.h" // shader config file
 #include "..\..\..\..\GameEngine\TrueNature\Terrain.h"
 
 //

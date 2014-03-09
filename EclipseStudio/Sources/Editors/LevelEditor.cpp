@@ -1041,7 +1041,7 @@ extern	gobjid_t	UI_TargetObjID;
 extern	r3dMaterial	*UI_TargetMaterial;
 extern char	LevelEditName[64];
 
-#include "..\..\Data\Shaders\DX9_P1\system\LibSM\shadow_config.h" // shader config file
+#include "..\bin\Data\Shaders\DX9_P1\system\LibSM\shadow_config.h" // shader config file
 
 #define LEVELEDITOR_SETTINGS_FILE	"%s/EditorSettings.xml"
 
