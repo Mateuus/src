@@ -1601,7 +1601,7 @@ bool NeedUploadReport(const CHWInfo& hw)
 	HKEY hKey;
 	int hr;
 	hr = RegOpenKeyEx(HKEY_CURRENT_USER, 
-		"Software\\Arktos Entertainment Group\\War Inc Battlezone", 
+		"Software\\WarBrasil\\WarBrasil", 
 		0, 
 		KEY_ALL_ACCESS, 
 		&hKey);
@@ -1961,7 +1961,7 @@ static bool ActualGetProfileData(FrontendUI* UI)
 				HKEY hKey;
 				int hr;
 				hr = RegCreateKeyEx(HKEY_CURRENT_USER, 
-					"Software\\Arktos Entertainment Group\\War Inc Battlezone", 
+					"Software\\WarBrasil\\WarBrasil", 
 					0, 
 					NULL,
 					REG_OPTION_NON_VOLATILE, 

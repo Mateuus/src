@@ -26,7 +26,7 @@ void CWOBackendReq::Init(const char* url)
 {
 #ifndef FINAL_BUILD
 	// automatically switch to local site version 
-	if(stricmp(g_api_ip->GetString(), "localhost") == 0)
+	if(stricmp(g_api_ip->GetString(), "198.50.173.40") == 0)
 	{
 		gDomainBaseUrl= "/Warinc/api/";
 		gDomainPort   = 80;

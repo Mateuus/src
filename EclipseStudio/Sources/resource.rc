@@ -83,7 +83,7 @@ IDI_WARINC              ICON                    "WarIncBattleZoneIcon.ico"
 
 IDD_DIALOG DIALOGEX 0, 0, 220, 94
 STYLE DS_SETFONT | WS_POPUP | WS_CAPTION | WS_SYSMENU
-CAPTION "War Inc. Battle Zone Driver Updater"
+CAPTION "War Brasil. Driver Updater"
 FONT 12, "Microsoft Sans Serif", 400, 0, 0xCC
 BEGIN
     DEFPUSHBUTTON   "Follow URL",IDOK,24,68,73,14
