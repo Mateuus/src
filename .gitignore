@@ -1,3 +1,6 @@
 /External
 /EclipseStudio/*.suo
 /EclipseStudio/*.ncb
+/EclipseStudio/Debug
+/EclipseStudio/Final
+/Eternity/Final

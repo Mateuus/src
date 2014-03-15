@@ -812,7 +812,7 @@ static void executeTopMenuButton(const CUpdater& updater, int btnIdx)
   {
     case 0: // how to play
     {
-      ShellExecute(NULL, "open", "http://thewarinc.com/faq", "", NULL, SW_SHOW);
+     // ShellExecute(NULL, "open", "http://thewarinc.com/faq", "", NULL, SW_SHOW);
       break;
     }
 
@@ -826,7 +826,7 @@ static void executeTopMenuButton(const CUpdater& updater, int btnIdx)
     
     case 2: // forums
     {
-      ShellExecute(NULL, "open", "http://forums.thewarinc.com", "", NULL, SW_SHOW);
+     // ShellExecute(NULL, "open", "http://forums.thewarinc.com", "", NULL, SW_SHOW);
       break;
     }
     
@@ -841,25 +841,25 @@ static void executeTopMenuButton(const CUpdater& updater, int btnIdx)
     
     case 4: // support
     {
-      ShellExecute(NULL, "open", "http://support.thewarinc.com", "", NULL, SW_SHOW);
+     // ShellExecute(NULL, "open", "http://support.thewarinc.com", "", NULL, SW_SHOW);
       break;
     }
     
     case 5: // youtube
     {
-      ShellExecute(NULL, "open", "http://www.youtube.com/user/WarIncBattlezone", "", NULL, SW_SHOW);
+    //  ShellExecute(NULL, "open", "http://www.youtube.com/user/WarIncBattlezone", "", NULL, SW_SHOW);
       break;
     }
     
     case 6: // facebook
     {
-      ShellExecute(NULL, "open", "http://www.facebook.com/warbattlezone", "", NULL, SW_SHOW);
+      ShellExecute(NULL, "open", "http://www.facebook.com/equipewarbrasil", "", NULL, SW_SHOW);
       break;
     }
     
     case 7: // twitter
     {
-      ShellExecute(NULL, "open", "http://twitter.com/#!/thewarinc", "", NULL, SW_SHOW);
+     // ShellExecute(NULL, "open", "http://twitter.com/#!/thewarinc", "", NULL, SW_SHOW);
       break;
     }
   }
@@ -888,9 +888,9 @@ static void drawUpdateButtons(CUpdater& updater)
   if(updater.result_ == CUpdater::RES_PLAY && updater.IsServerOnline())
   {
     if(insideRect(g_rPlayBtn, g_mx, g_my)) {
-      g_imBtnPg[1]->draw(456, 475, 328, 128, clr);
+      g_imBtnPg[1]->draw(485, 500, 328, 128, clr);
     } else {
-      g_imBtnPg[0]->draw(456, 475, 328, 128, clr);
+      g_imBtnPg[0]->draw(485, 500, 328, 128, clr);
     }
 
     if(insideRect(g_rPlayBtn, g_mx, g_my) && g_mb) {
