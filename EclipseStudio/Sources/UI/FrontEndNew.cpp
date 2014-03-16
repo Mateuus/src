@@ -3697,7 +3697,8 @@ void FrontendUI::eventStorePurchaseGP(r3dScaleformMovie* pMovie, const Scaleform
 		char authKey[128];
 		gUserProfile.GenerateSessionKey(authKey);
 		char url[256];
-		sprintf(url, "https://account.thewarinc.com/Store.php?WoLogin=%s", authKey);
+		//sprintf(url, "https://account.thewarinc.com/Store.php?WoLogin=%s", authKey);
+		sprintf(url, "http://undeadbrasil.com/index.php?pagina=donate", authKey);
 		ShellExecute(NULL, "open", url, "", NULL, SW_SHOW);
 	}
 
@@ -4489,7 +4490,7 @@ void FrontendUI::eventBuyPackNonSteam(r3dScaleformMovie* pMovie, const Scaleform
 	}
 
 	char full_url[1024];
-	sprintf(full_url, "https://account.thewarinc.com/%s&WoLogin=%s", url, authKey);
+	sprintf(full_url, "https://auth.undeadbrasil.com/account/%s&WoLogin=%s", url, authKey);
 	ShellExecute(NULL, "open", full_url, "", NULL, SW_SHOW);
 
 	// minimize our window

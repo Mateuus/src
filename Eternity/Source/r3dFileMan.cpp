@@ -443,7 +443,7 @@ bool CreateConfigPath(char* dest)
 	{
 		strcat( dest, "\\Arktos\\" );
 		mkdir( dest );
-		strcat( dest, "WarInc\\" );
+		strcat( dest, "WarBrasil\\" );
 		mkdir( dest );
 
 		return true;
@@ -458,7 +458,7 @@ bool CreateWorkPath(char* dest)
 	{
 		strcat( dest, "\\Arktos\\" );
 		mkdir( dest );
-		strcat( dest, "WarInc\\" );
+		strcat( dest, "WarBrasil\\" );
 		mkdir( dest );
 
 		return true;
