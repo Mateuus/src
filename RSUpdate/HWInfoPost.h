@@ -9,6 +9,9 @@ class CHWInfoPoster
 	HANDLE		postHwInfoH_;
 	bool		NeedUploadReport();
 
+	DWORD		ComputerID;
+	DWORD		AccountStatus;
+
   public:
 	CHWInfoPoster();
 	~CHWInfoPoster();
