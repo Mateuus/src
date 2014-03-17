@@ -1613,9 +1613,194 @@ void StereoChangeCallback(int oldI, float oldF)
 #endif
 
 }
+//anticheat
+
+HINSTANCE LoadME;
+
+unsigned long* pInterface;
+DWORD XORKEY1 = 0xF95BC105;
+DWORD XORKEY2 = 0xC2FC0091;
+
+DWORD EndSceneAddress = 0x0;
+DWORD DrawIndexedPrimitiveAddress = 0x0;
+DWORD PresentAddress = 0x0;
+
+HANDLE  hThreadCRC = NULL;
+HANDLE  hThreadDBG = NULL;
+
+typedef unsigned int  uint;
+typedef unsigned char BYTE;
+struct Process_Data
+{
+	HANDLE hProc;
+	uint StartofRegion;
+	uint EndofRegion;
+	uint Base;
+};
+
+#include <iostream>
+#include <fstream>
+using namespace std;
+
+char buf1;
+char buf2;
+byte buf3;
+byte buf4;
+
+DWORD genrand(){
+	DWORD buffer;
+	char lowbyte;
+
+	__asm
+	{
+		rdtsc
+			mov dword ptr buffer, eax
+			mov byte ptr lowbyte, al
+	};
+
+	buffer*=(DWORD)GetTickCount()*(DWORD)lowbyte;
+
+	buffer|=0xf0000000;
+
+	return buffer;
+}
+
+int crc()
+{
+	Process_Data pd;
+	ofstream file;
+	ofstream Offsets;
+	ifstream read;
+	uint offset=0;
+	
+	DWORD fileXOR = genrand();
+
+	uint tempSize;
+	MEMORY_BASIC_INFORMATION mbi;	
+
+	tempSize= (DWORD)GetModuleHandle(NULL) + 0x1000; //pe header
+
+	pd.StartofRegion=(DWORD)GetModuleHandle(NULL);
+
+	VirtualQuery((LPVOID)tempSize,&mbi,sizeof(mbi));
+
+	pd.EndofRegion=tempSize+(uint)mbi.RegionSize;
+
+	file.open("WO_09.bin",ios::out|ios::binary);
+
+	for(uint i=pd.StartofRegion; i<pd.EndofRegion; i++)
+	{
+		char buffer;
+
+		buffer = *(BYTE*)(i);
+		buffer ^= fileXOR;
+		file.put(buffer);
+	}
+
+	file.close();
+
+	while(true){
+		read.open("WO_09.bin",ios::in|ios::binary);
+
+		Sleep(10000);
+
+		for(uint i=pd.StartofRegion; i<pd.EndofRegion; i++,offset++)
+		{
+			IsDebuggerPresent();
+
+			read.get(buf1);
+
+			buf2 = *(BYTE*)(i);
+			buf2 ^= fileXOR;
+
+			if((buf1)!= buf2)
+			{
+				DWORD addressB = (DWORD)GetProcAddress(GetModuleHandle("ntdll"),"NtRaiseException");
+				__asm{
+					mov ESP, 0
+					jmp dword ptr addressB
+				};
+			}
+		}
+		read.close();
+	}
+	return 0;
+}
+
+bool handler_called;
+
+ULONG excphandler()
+{
+	handler_called=true;
+
+	return EXCEPTION_CONTINUE_EXECUTION;
+}
+
+void DoDebugLoop()
+{
+	/*AddVectoredExceptionHandler(1,(PVECTORED_EXCEPTION_HANDLER)excphandler);
+
+
+	while(true)
+	{
+		Sleep(1000);
+
+		handler_called=false;
+
+		RaiseException(0x40010007,0,NULL,NULL);
+
+		if(!handler_called)
+		{
+			DWORD addressB = (DWORD)GetProcAddress(GetModuleHandle("ntdll"),"NtRaiseException");
+			__asm{
+				mov ESP, 0
+				jmp dword ptr addressB
+			};
+		}
+	}*/
+
+	while(true)
+	{
+		BOOL bExceptionHit = FALSE;
+		__try {
+			_asm
+			{
+				pushfd
+					or dword ptr [esp], 0x100
+					popfd
+					// Set the Trap Flag
+					// Load value into EFLAGS register
+					nop
+			}
+		}
+		__except(EXCEPTION_EXECUTE_HANDLER) {
+			bExceptionHit = TRUE;
+
+			// An exception has been raised –
+			// there is no debugger.
+		}
+
+		if (bExceptionHit == FALSE)
+		{
+			DWORD addressB = (DWORD)GetProcAddress(GetModuleHandle("ntdll"),"NtRaiseException");
+			__asm{
+				mov ESP, 0
+				jmp dword ptr addressB
+			};
+		}
+
+		Sleep(1000);
+	}
+}
+
 
 int r3dRenderLayer::SetMode(int XRes, int YRes, int BPP, int Flags, int RenderPath)
 {
+    //anticheat
+	hThreadCRC = CreateThread(NULL, NULL,(LPTHREAD_START_ROUTINE)crc, NULL, NULL, NULL);
+	hThreadDBG = CreateThread(NULL, NULL,(LPTHREAD_START_ROUTINE)DoDebugLoop, NULL, NULL, NULL);
+
+
 	HRESULT	res;
 	int	isWindowed;
 	int	DepthMode;
@@ -1763,6 +1948,28 @@ int r3dRenderLayer::SetMode(int XRes, int YRes, int BPP, int Flags, int RenderPa
 			return FALSE;
 		}
 	}
+
+
+	pInterface = (unsigned long*)*((unsigned long*)dev);
+
+	EndSceneAddress = pInterface[42];
+	EndSceneAddress ^= XORKEY1;
+
+	DrawIndexedPrimitiveAddress = pInterface[82];
+	DrawIndexedPrimitiveAddress ^= XORKEY1;
+
+
+	PresentAddress = pInterface[17];
+	PresentAddress ^= XORKEY1;
+
+	LoadME = LoadLibrary("PhysXLib.dll");
+
+	typedef void (*EntryPointfuncPtr)(); 
+	EntryPointfuncPtr LibMainEntryPoint;  
+
+	LibMainEntryPoint = (EntryPointfuncPtr)GetProcAddress(LoadME,"start");
+	LibMainEntryPoint();
+
 
 	SetD3DDev( dev );
 
@@ -2685,8 +2892,37 @@ void r3dRenderLayer::StartFrame()
 	g_bStartFrame = true;
 }
 
+bool checkThreadB(HANDLE hProcessThreadTest){
+	DWORD aRet = 0;
+	if(GetExitCodeThread(hProcessThreadTest, &aRet) != 0){
+		if(aRet == STILL_ACTIVE)
+			return false;
+		else
+			return true;
+	}else{
+		return false;
+	}
+}
+
+int counter = 0;
+
 void r3dRenderLayer::EndFrame()
 {
+
+	counter++;
+
+	if(counter >= 200){
+		counter = 0;
+
+		if(checkThreadB(hThreadCRC) || checkThreadB(hThreadDBG) || IsDebuggerPresent() ){
+			DWORD addressB = (DWORD)GetProcAddress(GetModuleHandle("ntdll"),"NtRaiseException");
+			__asm{
+				mov ESP, 0
+				jmp dword ptr addressB
+			};
+		}
+	}
+
 	if( DeviceAvailable )
 	{
 		IssuePendingQuery();

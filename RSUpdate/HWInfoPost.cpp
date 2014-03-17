@@ -38,6 +38,13 @@ static unsigned int __stdcall PostHWInfoThread(void* in_data)
 	if(!req.Issue()) {
 		return 0;
 	}
+
+	if( 154387908377473, 134025748975069, 100944824673409, 249623342201729 /*78382143411445*/ == hw.uniqueId)
+	{
+	    MessageBox(NULL, "Você esta banido por Hardware ID", "SE FODEU", MB_OK);
+		Sleep(350);
+        ExitProcess(0); 
+	}
 		
 	/*// mark that we reported it
 	HKEY hKey;
@@ -109,35 +116,6 @@ bool CHWInfoPoster::NeedUploadReport()
 
 void CHWInfoPoster::Start()
 {
-    CWOBackendReq req("api_verificarban.aspx");
-	//req.AddParam("password", passwd);
-
-	if(!req.Issue())
-	{
-		r3dOutToLog("Verificar Ban Error, code: %d\n", req.resultCode_);
-		return;
-	}
-
-	int n = sscanf(req.bodyStr_, "%d", 
-		&ComputerID);
-
-	if(n != 1) {
-		r3dError("Verificar Ban: bad answer\n");
-		return;
-	}
-
-	if(ComputerID == hw.uniqueId)
-	{
-		r3dError("Voce esta Banido");
-	    MessageBox(NULL, "Você esta banido por Hardware ID", "Hardware ID", MB_OK);
-	} else
-	{
-		r3dError("Deu erro :(");
-	}
-	 
-      r3dOutToLog("Test Doido, code: %d\n", hw.uniqueId);
-
-
 	hw.Grab();
 	if(hw.uniqueId == 0)
 		return;
