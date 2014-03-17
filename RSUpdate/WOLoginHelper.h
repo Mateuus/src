@@ -25,6 +25,7 @@ class CLoginHelper
 	  ANS_Logged,
 	  ANS_BadPassword,
 	  ANS_Frozen,
+	  ANS_BanHwid,
 	};
 	volatile DWORD loginAnswerCode;
 
@@ -55,12 +56,14 @@ class CLoginHelper
 	  loginAnswerCode = CLoginHelper::ANS_Processing;
 	}
 	void		DoLogin();
+ 
 	
 	bool		CheckSteamLogin();
 	bool		CheckG1Login();
 
 	void		SaveUserName();
 	bool		LoadUserName();
+	
 	
 	void		CreateAuthToken(char* token) const;
 	void		CreateLoginToken(char* token) const;

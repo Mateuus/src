@@ -2,7 +2,7 @@
 #include "r3d.h"
 
 bool	UPDATER_UPDATER_ENABLED  = 1;
-char	UPDATER_VERSION[512]     = "1.3.6";
+char	UPDATER_VERSION[512]     = "1.4.1";
 char	UPDATER_VERSION_SUFFIX[512] = "";
 char	UPDATER_BUILD[512]	 = __DATE__ " " __TIME__;
 
@@ -11,11 +11,11 @@ char	GAME_EXE_NAME[512]       = "WarBrasil.exe";
 char	GAME_TITLE[512]          = "War Brasil";
 
 // updater (xml and exe) and game info on our server.
-char	UPDATE_DATA_URL[512]     = "https://198.50.173.40/wo/wo.xml";	// url for data update
-char	UPDATE_UPDATER_URL[512]  = "https://198.50.173.40/wo/updater/woupd.xml";
+char	UPDATE_DATA_URL[512]     = "http://undeadbrasil.com/warbrasilcliente/wo.xml";	// url for data update
+char	UPDATE_UPDATER_URL[512]  = "http://undeadbrasil.com/warbrasilcliente/updater/woupd.xml";
 
 // HIGHWIND CDN
-char	UPDATE_UPDATER_HOST[512] = "http://198.50.173.40/wo/updater/";
+char	UPDATE_UPDATER_HOST[512] = "http://undeadbrasil.com/warbrasilcliente/updater/";
 // PANDO CDN
 //char	UPDATE_UPDATER_HOST[512] = "http://arktos.pandonetworks.com/Arktos/wo/updater/";
 

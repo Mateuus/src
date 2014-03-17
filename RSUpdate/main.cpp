@@ -410,7 +410,7 @@ void game::Init(void)
     return;
   }
   
-  //gHwInfoPoster.Start(); -- DISABLED FOR NOW
+  gHwInfoPoster.Start(); //-- DISABLED FOR NOW
 
   // set small icon
   ::SendMessage(win::hWnd, WM_SETICON, FALSE, (LPARAM)::LoadIcon(win::hInstance, MAKEINTRESOURCE(IDI_WARINC_SMALL)));

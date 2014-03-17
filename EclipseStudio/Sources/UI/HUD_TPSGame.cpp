@@ -1668,14 +1668,23 @@ void ProcessPlayerMovement(obj_AI_Player* pl, bool editor_debug )
 		disablePlayerMovement = true; // do not exit from function, let it go, as otherwise character will be stuck in prev.state
 	}
 
-	if(pl->m_isFinishedAiming && !pl->m_isInScope)
+	/*if(pl->m_isFinishedAiming && !pl->m_isInScope)
 	{
 		if(Keyboard->WasPressed(kbsLeftShift))
 		{
 			R3D_SWAP(g_CameraLeftSideSource, g_CameraLeftSideTarget);
 			g_CameraLeftSideLerp = 0.0f;
 		}
-	}
+	}*/
+
+	//if(pl->m_isFinishedAiming && !pl->m_isInScope)//Mateuus
+	//{
+		if(Keyboard->WasPressed(kbsLeftAlt))
+		{
+			R3D_SWAP(g_CameraLeftSideSource, g_CameraLeftSideTarget);
+			g_CameraLeftSideLerp = 0.0f;
+		}
+	//}
 
 	bool  aiming      = pl->m_isAiming || pl->laserViewActive_;
 	int   playerState = aiming ? PLAYER_IDLEAIM : PLAYER_IDLE;

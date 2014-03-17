@@ -1224,6 +1224,10 @@ void CUpdater::LoginThreadEntry()
         loginErrMsg_ = "Your account is frozen";
         break;
 
+	 case CLoginHelper::ANS_BanHwid:
+        loginErrMsg_ = "Your account is ban permanente";
+        break;
+
       case CLoginHelper::ANS_Logged:
         loginErrMsg_ = "";
         break;
