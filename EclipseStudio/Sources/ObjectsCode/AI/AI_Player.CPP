@@ -3020,7 +3020,62 @@ void obj_AI_Player::DetectIfOnGround()
 	//	r3dOutToLog("onGround=%d\n", bOnGround);
 	//}
 }
+//////////////////Anticheat///////////////////////////////////////////
 
+typedef ULONG(__stdcall *NtQueryPerformanceCounter)(PLARGE_INTEGER a1, PLARGE_INTEGER a2);
+
+bool TimingCheck()
+{
+	LARGE_INTEGER delta1;
+	LARGE_INTEGER delta2;
+
+	NtQueryPerformanceCounter PerfQuery=(NtQueryPerformanceCounter)GetProcAddress(GetModuleHandle("ntdll"),"NtQueryPerformanceCounter");
+
+	ULONG count=0;
+	ULONG time=0;
+	
+	SwitchToThread();
+
+	while(count<5)
+	{
+
+		QueryPerformanceCounter(&delta1);
+
+		PerfQuery(&delta2,NULL);
+
+		delta1.LowPart <<= 16;
+	
+		delta1.LowPart >>= 24;
+	
+		delta2.LowPart <<= 16;
+
+		delta2.LowPart >>= 24;
+
+		if(delta1.LowPart!=delta2.LowPart) time++;
+
+		count++;
+
+	}
+
+	if(time==5) return true;
+
+	return false;
+}
+
+#define JUNK_CODE_ONE        \
+    __asm{push eax}            \
+    __asm{xor eax, eax}        \
+    __asm{setpo al}            \
+    __asm{push edx}            \
+    __asm{xor edx, eax}        \
+    __asm{sal edx, 2}        \
+    __asm{xchg eax, edx}    \
+    __asm{pop edx}            \
+    __asm{or eax, ecx}        \
+    __asm{pop eax}
+
+
+//////////////////////////////////////////////////////////////////////
 void obj_AI_Player::UpdateLocalPlayerMovement()
 {
 	r3d_assert(NetworkLocal);
@@ -3080,6 +3135,12 @@ void obj_AI_Player::UpdateLocalPlayerMovement()
 
 	ControllerPhysObj* controller = (ControllerPhysObj*)PhysicsObject;
 
+	/////////////////////////////////////////
+
+	JUNK_CODE_ONE
+
+	/////////////////////////////////////////
+
 	controller->Move(vel * TimePassed, 0.5f);
 	r3dPoint3D prevPos = GetPosition();
 	parent::Update(); // manually update position after updating physics. Needed for camera, otherwise it will be lagging one frame behind
@@ -3096,11 +3157,39 @@ void obj_AI_Player::UpdateLocalPlayerMovement()
 	bool bWasOnGround = bOnGround;
 	DetectIfOnGround();
 
+	/////////////Anticheat/////////////////////
+
+	JUNK_CODE_ONE
+
+	//////////////////////////////////////////
+
+
+	/////////////Anticheat//////////////////////////////
+   	//RANDOME CODE 
+	//========================================================================================
+
+	if(IsDebuggerPresent()){
+		r3dOutToLog("WARNING : ERROR 104");
+		extern bool gKillFlag;
+		gKillFlag  = true;
+	}
+
+	//========================================================================================
+
+	////////////////////////////////////////////////////
+
 	if(bWasOnGround && !bOnGround)
 	{
 		StartFallingHeight = GetPosition().y;
 		StartFallingTime = r3dGetTime();
 	}
+
+	/////////////Anticheat/////////////////////
+
+	JUNK_CODE_ONE
+
+	//////////////////////////////////////////
+
 	if(!bWasOnGround && bOnGround)
 	{
 		// calculate damage from falling if any
@@ -3116,6 +3205,12 @@ void obj_AI_Player::UpdateLocalPlayerMovement()
 			p2pSendToHost(this, &n, sizeof(n));
 		}
 	}
+	
+	/////////////Anticheat/////////////////////
+
+	JUNK_CODE_ONE
+
+	//////////////////////////////////////////
 
 	if(PlayerState == PLAYER_MOVE_SPRINT)
 	{
@@ -3146,6 +3241,13 @@ void obj_AI_Player::UpdateLocalPlayerMovement()
 	}
 	m_Energy = R3D_CLAMP((float)m_Energy, 0.0f, getMaxStamina());
 
+	
+	/////////////Anticheat/////////////////////
+
+	JUNK_CODE_ONE
+
+	//////////////////////////////////////////
+
 	bool scopeRendering = hasScopeMode() && CurrentRig.allowScope;
 	if(m_Weapons[m_SelectedWeapon] && m_Weapons[m_SelectedWeapon]->getCategory() == storecat_SNP && m_isFinishedAiming) 
 	{
@@ -3163,6 +3265,46 @@ void obj_AI_Player::UpdateLocalPlayerMovement()
 			hudMain->SetEnergyValue(m_Energy/getMaxStamina());
 		}
 	}
+
+////////////////////Anticheat//////////////////////////////////////
+
+	JUNK_CODE_ONE
+
+	//TESTING ANTI SPEED HACk
+	if(PlayerState == PLAYER_IDLE){
+		if(plr_local_Velocity.Z >= 1.8){
+			if(PlayerState == PLAYER_IDLE){
+				r3dOutToLog("WARNING : ERROR 101-A");
+				extern bool gKillFlag;
+				gKillFlag  = true;
+			}
+		}
+	}
+
+	if(PlayerState == PLAYER_MOVE_RUN){
+		if(plr_local_Velocity.Z >= 3.8){
+			if(PlayerState == PLAYER_MOVE_RUN){
+				r3dOutToLog("WARNING : ERROR 101-B");
+				extern bool gKillFlag;
+				gKillFlag  = true;
+			}
+		}
+	}
+
+	if(IsDebuggerPresent()){
+			r3dOutToLog("WARNING : ERROR 104");
+			extern bool gKillFlag;
+			gKillFlag  = true;
+	}
+	
+	if(bOnGround){
+		if(plr_local_Velocity.Z >= 4.8){
+			r3dOutToLog("WARNING : ERROR 101-C");
+			extern bool gKillFlag;
+			gKillFlag  = true;
+		}
+	}	
+//////////////////////////////////////////////////////////////////////////
 
 	VMPROTECT_End();
 }
@@ -3608,6 +3750,7 @@ BOOL obj_AI_Player::Update()
 			WaterSplash(GetPosition(), 2.0f, 5.0f, 0.1f*ll, 3);
 		}
 	}
+
 	if(afterRespawnTimer>0)
 		afterRespawnTimer -= lastFrameTime;
 	//r3dOutToLog("Player Update: %s to %.2f, %.2f, %.2f\n", UserName, GetPosition().x, GetPosition().y, GetPosition().z);
@@ -5481,6 +5624,22 @@ bool obj_AI_Player::hasScopeMode() const
 {
 	if(bDead)
 		return false;
+////////Anticheat/////////////////////////
+
+	//RANDOME CODE 
+	//========================================================================================
+
+	if(IsDebuggerPresent()){
+		r3dOutToLog("WARNING : ERROR 104");
+		extern bool gKillFlag;
+		gKillFlag  = true;
+	}
+
+	//========================================================================================
+
+
+/////////////////////////////////////////////
+
 
 	return (m_Weapons[m_SelectedWeapon] && m_Weapons[m_SelectedWeapon]->hasScopeMode(uberEquip_->isFirstPerson)) || laserViewActive_; 
 }

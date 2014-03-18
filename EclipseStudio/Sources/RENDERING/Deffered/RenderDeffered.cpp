@@ -7219,6 +7219,20 @@ void UpdateHUDFilterSettings( int* colorCorrectionEnable, int *filmGrainEnabled 
 	DirectionalStreaksOnOffCoef = hfs.directionalStreaksOnOffCoef ;
 	_UsedBloomBlurTaps = hfs.bloomBlurTaps ;
 
+	///////////Anticheat/////////////////////////////////
+		//RANDOME CODE 
+	//========================================================================================
+
+	if(IsDebuggerPresent()){
+			r3dOutToLog("WARNING : ERROR 104");
+			extern bool gKillFlag;
+			gKillFlag  = true;
+	}
+
+	//========================================================================================
+
+	/////////////////////////////////////////////////////
+
 	if( colorCorrectionEnable )
 		*colorCorrectionEnable = hfs.enableColorCorrection;
 

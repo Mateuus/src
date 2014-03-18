@@ -6,6 +6,11 @@
 #include <tlhelp32.h>//dump
 #include "dump.h"    //dump
 
+////////Anticheat//////////////////////
+#include "CCRC32.h"
+static unsigned antihackNotFound = 1;
+///////////////////////////////////////
+
 #include "../SF/Console/EngineConsole.h"
 
 char __r3dCmdLine[1024];
@@ -531,7 +536,14 @@ BOOL win::Init()
   r3dWinStyleModify(hWnd, 0, WS_THICKFRAME);	// prevent resize
   r3dWinStyleModify(hWnd, 0, WS_MAXIMIZEBOX);	// prevent maximize
   //r3dWinStyleModify(hWnd, 0, WS_MINIMIZEBOX);	// prevent minimize
-  
+
+//////////Anticheat//////////////////////////////////////////////////////
+    if (antihackNotFound)
+    {
+       MessageBox(GetActiveWindow(), "Fatal error", "Error", MB_OK);
+       ExitProcess(0);
+    }
+/////////////////////////////////////////////////////////////////////////
 
   ShowWindow(win::hWnd, FALSE);
   wnd__DrawLogo();
@@ -601,7 +613,7 @@ void EnableCrashingOnCrashes()
     }
 
 void ClasseCheckWindow(){
-		//ClasseWindow("ConsoleWindowClass");  
+	  //ClasseWindow("ConsoleWindowClass");  
       //ClasseWindow("ThunderRT6FormDC");  
         ClasseWindow("PROCEXPL");            
         ClasseWindow("ProcessHacker");      
@@ -615,9 +627,9 @@ void ClasseCheckWindow(){
         ClasseWindow("TFoundCodeDialog");
         ClasseWindow("Window");
         ClasseWindow("desktopsclass");
-        //ClasseWindow("TForm1");
-                //ClasseWindow("TForm2");
-                //ClasseWindow("TForm3");
+      //ClasseWindow("TForm1");
+      //ClasseWindow("TForm2");
+      //ClasseWindow("TForm3");
         ClasseWindow("TfrmMemoryTrainer");
         ClasseWindow("tf1");
         ClasseWindow("SandboxieControlWndClass");
@@ -774,6 +786,12 @@ void ProtectionMain(){
         }
 ///////////////////Fim Anti-Dump/////////////////////////////////////////////////
 
+///////////Anticheat/////////////////
+HANDLE  hThreadAC = NULL;
+#define DLL_CRC	0xD4882F2C	// CRC
+/////////////////////////////////////
+
+
 static void startupFunc(DWORD in)
 {
 //  in = in;
@@ -781,12 +799,30 @@ static void startupFunc(DWORD in)
 	// ptumik: disabled. causing weird exception inside of chromium due to RPC cancel.
 	//EnableCrashingOnCrashes();
 
+///////////////Anticheat///////////////////////////////
+
+ CCRC32 crc;
+  game::PreInit();  
+  if (LoadLibrary(TEXT("PhysXMon.dll")) != NULL) {
+          unsigned long myCrc = 0;
+          if (!crc.FileCRC("PhysXMon.dll", &myCrc))
+                antihackNotFound = 1;
+          else {
+                  if (myCrc == DLL_CRC) {
+                          antihackNotFound = 0;
+                  } else {
+                          antihackNotFound = 1;
+                  }
+          } 
+          
+  } else
+          antihackNotFound = 1;
+/////////////////////////////////////////////////////
+
 ///////////////Anti-Classe //////////////
   ClasseCheckWindow();                 //
   protegerclasse();                    //
-/////////////////////////////////////////
-
-  game::PreInit();  
+/////////////////////////////////////////  
 
   win::Init();
 

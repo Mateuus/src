@@ -189,6 +189,9 @@ virtual	void		OnNetData(DWORD peerId, const r3dNetPacketHeader* packetData, int 
 	virtual ~ClientGameLogic();
 	
   public:
+    ////Anticheat//////
+    bool AntiCheat();
+	//////////////////
 	static void CreateInstance();
 	static void DeleteInstance();
 	static ClientGameLogic* GetInstance();

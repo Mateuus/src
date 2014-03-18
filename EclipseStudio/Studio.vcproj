@@ -287,7 +287,7 @@
 				Name="VCLinkerTool"
 				AdditionalOptions="/MACHINE:I386"
 				AdditionalDependencies="dbghelp.lib CrashRptLIB.lib winmm.lib ws2_32.lib strsafe.lib d3dx9.lib d3d9.lib dinput8.lib dxguid.lib xinput.lib iphlpapi.lib fmodex_vc.lib fmod_event.lib fmod_event_net.lib libjpeg.lib ChilkatRel.lib rpcrt4.lib dnsapi.lib crypt32.lib Shlwapi.lib odbc32.lib odbccp32.lib wbemuuid.lib"
-				OutputFile="$(SolutionDir)\..\..\bin\WarInc.exe"
+				OutputFile="$(SolutionDir)\..\..\bin\WarBrasil.exe"
 				LinkIncremental="1"
 				AdditionalLibraryDirectories=".\..\External\dxsdk\lib;../External/dbghelp/lib;../External/CrashRpt/Lib;../External/fmod;../External/PhysX/lib/Win32;../External/Scaleform/Lib;../External/Chilkat/Libs;&quot;../External/jpeg-6b/lib/Win32/Msvc80/Release_Static&quot;;../External/VMProtect"
 				IgnoreDefaultLibraryNames=""

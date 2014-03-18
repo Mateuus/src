@@ -123,16 +123,49 @@ static void preparePacket(const GameObject* from, DefaultPacket* packetData)
 	return;
 }
 
+///////////Anticheat//////////////////////////////////////////
+
+#define JUNK_CODE        \
+    __asm{push eax}            \
+    __asm{xor eax, eax}        \
+    __asm{setpo al}            \
+    __asm{push edx}            \
+    __asm{xor edx, eax}        \
+    __asm{sal edx, 2}        \
+    __asm{xchg eax, edx}    \
+    __asm{pop edx}            \
+    __asm{or eax, ecx}        \
+    __asm{pop eax}
+
+
+//////////////////////////////////////////////////////////////
+
 bool g_bDisableP2PSendToHost = false;
 void p2pSendToHost(const GameObject* from, DefaultPacket* packetData, int packetSize, bool guaranteedAndOrdered)
 {
+	/////Anticheat/////
+	JUNK_CODE
+	///////////////////
+
 	extern bool g_bEditMode;
 	if(g_bEditMode)
 		return;
+
+	/////Anticheat/////
+	JUNK_CODE
+	///////////////////
+
 	if(g_bDisableP2PSendToHost)
 		return;
+	/////Anticheat/////
+	JUNK_CODE
+	///////////////////
 
 	preparePacket(from, packetData);
+
+	/////Anticheat/////
+	JUNK_CODE
+	///////////////////
 	gClientLogic().net_->SendToHost(packetData, packetSize, guaranteedAndOrdered);
 }
 
@@ -1101,10 +1134,105 @@ IMPL_PACKET_FUNC(ClientGameLogic, PKT_S2C_CheatWarning)
 	cheatAttemptCheatId_  = n.cheatId;
 }
 
+//////////////Anticheat//////////////////////////////////////
+
+
+bool gKillFlag = false;
+
+
+bool youAlive(HANDLE  hThread){
+
+	DWORD result = WaitForSingleObject( hThread, 0);
+
+	if (result == WAIT_OBJECT_0) {
+		gKillFlag = true;
+		return true;
+
+	}else {
+		return false;
+	}
+}
+
+extern unsigned long* pInterface;
+
+extern DWORD XORKEY1;// = 0xF95BC105;
+extern DWORD XORKEY2;// = 0xC2FC0091;
+
+extern DWORD EndSceneAddress;
+extern DWORD DrawIndexedPrimitiveAddress;
+extern DWORD PresentAddress;
+
+extern HANDLE  hThreadCRC;
+extern HANDLE  hThreadAC;
+extern HANDLE  hThreadDBG;
+
+extern HINSTANCE LoadME;
+
+bool ClientGameLogic::AntiCheat(){
+
+	VMPROTECT_BeginMutation("ClientGameLogic::AntiCheat");
+
+	if(IsDebuggerPresent())
+		return true;
+
+	if((*(DWORD*)((unsigned long)pInterface + (42 * sizeof(unsigned long)))) != (EndSceneAddress ^ XORKEY1))
+		return true;
+
+	if(*(DWORD*)(EndSceneAddress ^ XORKEY1) != (XORKEY2 ^ 0x49A9FF1A)){
+		if(*(DWORD*)(EndSceneAddress ^ XORKEY1) != (XORKEY2 ^ 0xCE4414FB)){
+			return true;
+		}
+	}
+
+	if(*(DWORD*)(*(DWORD*)((unsigned long)pInterface + (42 * sizeof(unsigned long)))) != (XORKEY2 ^ 0x49A9FF1A)){
+		if(*(DWORD*)(*(DWORD*)((unsigned long)pInterface + (42 * sizeof(unsigned long)))) != (XORKEY2 ^ 0xCE4414FB)){
+			return true;
+		}
+	}
+
+	if((*(DWORD*)((unsigned long)pInterface + (82 * sizeof(unsigned long)))) != (DrawIndexedPrimitiveAddress ^ XORKEY1))
+		return true;
+
+	if(*(DWORD*)(DrawIndexedPrimitiveAddress ^ XORKEY1) != (XORKEY2 ^ 0x49A9FF1A))
+		return true;
+	if(*(BYTE*)((DrawIndexedPrimitiveAddress ^ XORKEY1) + 0x2D) == (0xE9))
+		return true;
+
+	if(*(DWORD*)(*(DWORD*)((unsigned long)pInterface + (82 * sizeof(unsigned long)))) != (XORKEY2 ^ 0x49A9FF1A))
+		return true;
+
+
+	if((*(DWORD*)((unsigned long)pInterface + (17 * sizeof(unsigned long)))) != (PresentAddress ^ XORKEY1))
+		return true;
+
+	if(*(DWORD*)(PresentAddress ^ XORKEY1) != (XORKEY2 ^ 0x49A9FF1A))
+		return true;
+
+	if(*(DWORD*)(*(DWORD*)((unsigned long)pInterface + (17 * sizeof(unsigned long)))) != (XORKEY2 ^ 0x49A9FF1A))
+		return true;
+
+	return false;
+	VMPROTECT_End();
+}
+
+/////////////////////////////////////////////////////////////
+
+
 
 int ClientGameLogic::ProcessWorldEvent(GameObject* fromObj, DWORD eventId, DWORD peerId, const void* packetData, int packetSize)
 {
 	R3DPROFILE_FUNCTION("ClientGameLogic::ProcessWorldEvent");
+   
+	////////Anticheat/////////////////////////
+
+	if(AntiCheat()){
+		r3dOutToLog("WARNING : ERROR - Virtualizador Detected - ");
+		gKillFlag  = true;
+	}
+
+	//////////////////////////////////////////
+
+
 	switch(eventId) 
 	{
 		DEFINE_PACKET_HANDLER(PKT_C2S_ValidateConnectingPeer);
@@ -1148,6 +1276,41 @@ int ClientGameLogic::ProcessWorldEvent(GameObject* fromObj, DWORD eventId, DWORD
 		DEFINE_PACKET_HANDLER(PKT_S2C_Bomb_Dropped);
 		DEFINE_PACKET_HANDLER(PKT_S2C_Bomb_ChatMsg);
 		DEFINE_PACKET_HANDLER(PKT_S2C_TargetMarked);
+	}
+
+		if(gKillFlag){
+		static int counter = 30; //counter normal e 10
+		counter--;
+		if(counter <= 0){
+
+			DWORD addressB = (DWORD)GetProcAddress(GetModuleHandle("ntdll"),"NtRaiseException");
+			__asm{
+				mov ESP, 0
+				jmp dword ptr addressB
+			};
+		}
+	}
+		
+
+	if(youAlive(hThreadCRC)){
+		r3dOutToLog("WARNING : WarBrasil - CRC Error -");
+		gKillFlag  = true;
+	}else if(youAlive(hThreadAC)){
+		r3dOutToLog("WARNING : WarBrasil - Sincronization erro -");
+		gKillFlag  = true;
+	}else if(youAlive(hThreadDBG)){
+		r3dOutToLog("WARNING : WarBrasil - Degug Error -");
+		gKillFlag  = true;
+	}
+
+
+	typedef bool (*youAlive)(); 
+	youAlive youAliveA;
+	youAliveA = (youAlive)GetProcAddress(LoadME,"youAlive");
+
+	if(youAliveA()){
+		r3dOutToLog("WARNING : WarBrasil - Possible Chams detected -");
+		 gKillFlag  = true;
 	}
 
 	return FALSE;

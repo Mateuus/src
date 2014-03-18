@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="windows-1251"?>
 <VisualStudioProject
 	ProjectType="Visual C++"
-	Version="9.00"
+	Version="9,00"
 	Name="Eternity"
 	ProjectGUID="{3D51BE84-6441-4AC7-A73F-587C6B36DDAF}"
 	RootNamespace="Eternity"
@@ -572,6 +572,14 @@
 			</File>
 			<File
 				RelativePath=".\Include\BezierGradient.h"
+				>
+			</File>
+			<File
+				RelativePath=".\Source\CCRC32.cpp"
+				>
+			</File>
+			<File
+				RelativePath=".\Include\CCRC32.h"
 				>
 			</File>
 			<File
