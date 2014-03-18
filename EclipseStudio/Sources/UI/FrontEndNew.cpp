@@ -1597,7 +1597,7 @@ bool NeedUploadReport(const CHWInfo& hw)
 	if(hw.gfxErrors)
 		return true;
 
-	// query for game registry node
+	/*// query for game registry node
 	HKEY hKey;
 	int hr;
 	hr = RegOpenKeyEx(HKEY_CURRENT_USER, 
@@ -1620,7 +1620,7 @@ bool NeedUploadReport(const CHWInfo& hw)
 		if(time < repTime + (60 * 60 * 24 * 2))
 			return false;
 	}
-
+*/
 	return true;
 }
 
