@@ -154,7 +154,7 @@
 			<Tool
 				Name="VCLinkerTool"
 				AdditionalDependencies="winmm.lib ws2_32.lib strsafe.lib d3dx9.lib d3d9.lib dinput8.lib dxguid.lib xinput.lib Crypt32.lib ..\External\ChilKat\Libs\ChilkatRel.lib Shlwapi.lib"
-				OutputFile="..\..\bin\build\updater\$(ProjectName).exe"
+				OutputFile="..\..\bin\build\updater\WarBrasilLauncher.exe"
 				LinkIncremental="1"
 				AdditionalLibraryDirectories="..\External\dxsdk\Lib\"
 				UACExecutionLevel="2"

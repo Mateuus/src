@@ -2,7 +2,7 @@
 #include "r3d.h"
 
 bool	UPDATER_UPDATER_ENABLED  = 1;
-char	UPDATER_VERSION[512]     = "1.4.0";
+char	UPDATER_VERSION[512]     = "1.4.1";
 char	UPDATER_VERSION_SUFFIX[512] = "";
 char	UPDATER_BUILD[512]	 = __DATE__ " " __TIME__;
 
