@@ -3269,7 +3269,7 @@ void obj_AI_Player::UpdateLocalPlayerMovement()
 ////////////////////Anticheat//////////////////////////////////////
 
 	JUNK_CODE_ONE
-
+/*
 	//TESTING ANTI SPEED HACk
 	if(PlayerState == PLAYER_IDLE){
 		if(plr_local_Velocity.Z >= 1.8){
@@ -3303,7 +3303,7 @@ void obj_AI_Player::UpdateLocalPlayerMovement()
 			extern bool gKillFlag;
 			gKillFlag  = true;
 		}
-	}	
+	}	*/
 //////////////////////////////////////////////////////////////////////////
 
 	VMPROTECT_End();
