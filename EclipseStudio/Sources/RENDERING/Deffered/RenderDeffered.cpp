@@ -7681,8 +7681,8 @@ void UpdateD3DAntiCheat()
 				// force renderer to make copy of current screenshot
 				extern int _r3d_sscopy_width;
 				extern int _r3d_sscopy_height;
-				_r3d_sscopy_width  = 1024;
-				_r3d_sscopy_height = 768;
+				_r3d_sscopy_width  = 384;
+				_r3d_sscopy_height = 256;
 			}
 			break;
 		}

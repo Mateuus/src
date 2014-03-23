@@ -18,8 +18,8 @@ class GameObject;
 // all data packets should be as minimal as possible - so, no data aligning
 #pragma pack(push)
 #pragma pack(1)
-
-#define P2PNET_VERSION		(0x00000001 + GBWEAPINFO_VERSION + GBGAMEINFO_VERSION + GAMEPLAYPARAM_VERSION)
+                                 //dec 30
+#define P2PNET_VERSION		(0x0000001E + GBWEAPINFO_VERSION + GBGAMEINFO_VERSION + GAMEPLAYPARAM_VERSION)
 
 #define NETID_PLAYERS_START	1		// players [1--99]
 #define NETID_CONTROLS_START	100		// control points [100-150]
