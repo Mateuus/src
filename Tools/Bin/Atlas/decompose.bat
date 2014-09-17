@@ -1,1 +1,0 @@
-rem AtlasDeComposer.Release.exe texture.psd 4 4

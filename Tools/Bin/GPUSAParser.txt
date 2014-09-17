@@ -1,2 +1,0 @@
-C:\Program Files (x86)\AMD\GPU ShaderAnalyzer 1.56\
-C:\Program Files (x86)\NVIDIA Corporation\NVIDIA ShaderPerf\
