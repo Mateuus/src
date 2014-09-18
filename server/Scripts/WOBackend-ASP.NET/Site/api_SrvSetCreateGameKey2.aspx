@@ -1,0 +1,1 @@
+﻿<%@ Page Language="C#" AutoEventWireup="true" CodeFile="api_SrvSetCreateGameKey2.aspx.cs" Inherits="api_SrvSetCreateGameKey2" %>

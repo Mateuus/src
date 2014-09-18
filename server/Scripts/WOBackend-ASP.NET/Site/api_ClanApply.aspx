@@ -1,0 +1,1 @@
+﻿<%@ Page Language="C#" AutoEventWireup="true" CodeFile="api_ClanApply.aspx.cs" Inherits="api_ClanApply" %>

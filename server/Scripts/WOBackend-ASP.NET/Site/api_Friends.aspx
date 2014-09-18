@@ -1,0 +1,1 @@
+﻿<%@ Page Language="C#" AutoEventWireup="true" CodeFile="api_Friends.aspx.cs" Inherits="api_Friends" %>
