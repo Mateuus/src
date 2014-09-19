@@ -12,8 +12,8 @@ using System.Configuration;
 public class SQLBase
 {
     string server = "localhost,1433";
-    string user = "wz_api_user";
-    string pass = "Mateuus.27";
+    string user = "sas";
+    string pass = "DHe4843cMYS";
     string workdb = "Warinc";
 
     SqlConnection conn_ = null;
@@ -22,22 +22,22 @@ public class SQLBase
     {
         if (ConfigurationManager.AppSettings.Get("WO_Region") == "RU")
         {
-            server = "localhost,1433";
+         /*   server = "localhost,1433";
             //server = "rudb1.thewarinc.com,11433";
             user = "wz_api_user";
-            pass = "Mateuus.27";
+            pass = "Mateuus.27";*/
         }
         else if (ConfigurationManager.AppSettings.Get("WO_Region") == "PH")
         {
-            server = "localhost,1433";
+           /* server = "localhost,1433";
             user = "wz_api_user";
-            pass = "Mateuus.27";
+            pass = "Mateuus.27";*/
         }
         else
         {
             server = "localhost,1433";
-            user = "wz_api_user";
-            pass = "Mateuus.27";
+            user = "sas";
+            pass = "DHe4843cMYS";
         }
     }
 

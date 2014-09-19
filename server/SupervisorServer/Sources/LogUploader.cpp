@@ -41,8 +41,8 @@ void CLogUploader::Start()
 	{
 		r3dOutToLog("LogUploader: Working in DEV mode\n");
 
-		g_api_ip->SetString("localhost");
-		gDomainBaseUrl= "/Warinc/";
+		g_api_ip->SetString("127.0.0.1");
+		gDomainBaseUrl= "/warbrasil/";
 		gDomainPort   = 80;
 		gDomainUseSSL = false;
 	}

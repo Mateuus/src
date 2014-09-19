@@ -409,7 +409,7 @@ void PhysXWorld::Init()
 	}
 
 #ifndef FINAL_BUILD
-	PxExtensionVisualDebugger::connect(PhysXSDK->getPvdConnectionManager(), "198.50.173.40", 5425, 1000, true, PxGetDefaultDebuggerFlags());
+	PxExtensionVisualDebugger::connect(PhysXSDK->getPvdConnectionManager(), "127.0.0.1", 5425, 1000, true, PxGetDefaultDebuggerFlags());
 #endif
 
 	// set collision group BEFORE creating scene and cannot change after that
@@ -429,13 +429,13 @@ void PhysXWorld::Init()
 	setGroupCollisionFlag(PHYSCOLL_PROJECTILES, PHYSCOLL_LOCALPLAYER, false); 
 	setGroupCollisionFlag(PHYSCOLL_PROJECTILES, PHYSCOLL_NETWORKPLAYER, false); 
 
-	setGroupCollisionFlag(PHYSCOLL_PROJECTILES, PHYSCOLL_PLAYER_ONLY_GEOMETRY, false); 
+	setGroupCollisionFlag(PHYSCOLL_PROJECTILES, PHYSCOLL_PLAYER_ONLY_GEOMETRY,   false); 
 	setGroupCollisionFlag(PHYSCOLL_TINY_GEOMETRY, PHYSCOLL_PLAYER_ONLY_GEOMETRY, false); 
 	setGroupCollisionFlag(PHYSCOLL_NETWORKPLAYER, PHYSCOLL_PLAYER_ONLY_GEOMETRY, false);
 
-	setGroupCollisionFlag(PHYSCOLL_PROJECTILES, PHYSCOLL_CHARACTERCONTROLLER, false); 
+	setGroupCollisionFlag(PHYSCOLL_PROJECTILES, PHYSCOLL_CHARACTERCONTROLLER,   false); 
 	setGroupCollisionFlag(PHYSCOLL_TINY_GEOMETRY, PHYSCOLL_CHARACTERCONTROLLER, false); 
-	setGroupCollisionFlag(PHYSCOLL_LOCALPLAYER, PHYSCOLL_CHARACTERCONTROLLER, false);
+	setGroupCollisionFlag(PHYSCOLL_LOCALPLAYER, PHYSCOLL_CHARACTERCONTROLLER,   false);
 	setGroupCollisionFlag(PHYSCOLL_NETWORKPLAYER, PHYSCOLL_CHARACTERCONTROLLER, false);
 
 	//	Prevent collision between player and character ragdoll

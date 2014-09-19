@@ -178,7 +178,7 @@ int main(int argc, char* argv[])
     r3dOutToLog("API: %s\n", g_api_ip->GetString());
 
     // sleep 2 sec, waiting for master to start
-    if(stricmp(g_api_ip->GetString(), "localhost") == 0)
+    if(stricmp(g_api_ip->GetString(), "127.0.0.1") == 0)
 	::Sleep(2000);
     
     gSupervisorConfig = new CSupervisorConfig();
