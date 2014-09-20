@@ -26,7 +26,7 @@ void CWOBackendReq::Init(const char* url)
 {
 #ifndef FINAL_BUILD
 	// automatically switch to local site version 
-	if(stricmp(g_api_ip->GetString(), "127.0.0.1") == 0)
+	if(stricmp(g_api_ip->GetString(), "167.114.32.66") == 0)
 	{
 		gDomainBaseUrl= "/warbrasil/api/";
 		gDomainPort   = 80;

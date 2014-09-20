@@ -1559,21 +1559,21 @@ void game::MainLoop()
 		if(strstr(__r3dCmdLine, "-ffgrtvzdf") == NULL)
 		{
 			if(RUS_CLIENT) {
-				g_serverip->SetString("127.0.0.1");
+				g_serverip->SetString("167.114.32.66");
 			} else if(MASSIVE_CLIENT) {
-				g_serverip->SetString("127.0.0.1");
+				g_serverip->SetString("167.114.32.66");
 			} else {
-				g_serverip->SetString("127.0.0.1");
+				g_serverip->SetString("167.114.32.66");
 			}
 		}
 
 		// override API settings
 		if(RUS_CLIENT) {
-			g_api_ip->SetString("127.0.0.1");
+			g_api_ip->SetString("167.114.32.66");
 		} else if(MASSIVE_CLIENT) {
-			g_api_ip->SetString("127.0.0.1");
+			g_api_ip->SetString("167.114.32.66");
 		} else {
-			g_api_ip->SetString("127.0.0.1");
+			g_api_ip->SetString("167.114.32.66");
 		}
 	case	Menu_AppSelect::bStartGameSVN:
 		g_bEditMode = false;

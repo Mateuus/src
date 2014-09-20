@@ -264,7 +264,7 @@ void r3dThreadEntryHelper(threadEntry_fn fn, DWORD in)
 		info.pszAppVersion = L"0.2";
 		info.pszEmailTo = NULL;
 		
-		info.pszUrl = L"https://127.0.0.1/warbrasil/api/php/api_CrashRpt.php";
+		info.pszUrl = L"https://167.114.32.66/warbrasil/api/php/api_CrashRpt.php";
 		
 		info.pszCrashSenderPath = NULL;
 		info.pfnCrashCallback = &r3dCrashRptCallback;
@@ -277,7 +277,7 @@ void r3dThreadEntryHelper(threadEntry_fn fn, DWORD in)
 		//we should not restart app, as GNA using command line to pass login info
 		//info.dwFlags |= CR_INST_APP_RESTART;
 		//info.pszRestartCmdLine   = __r3dCmdLine; 
-		info.pszPrivacyPolicyURL = L"https://127.0.0.1/warbrasil/PrivacyPolicy.htm";
+		info.pszPrivacyPolicyURL = L"https://167.114.32.66/warbrasil/PrivacyPolicy.htm";
 		info.pszLangFilePath     = langFile;
 
 		int res = crInstallW(&info);

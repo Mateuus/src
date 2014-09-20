@@ -409,7 +409,7 @@ void PhysXWorld::Init()
 	}
 
 #ifndef FINAL_BUILD
-	PxExtensionVisualDebugger::connect(PhysXSDK->getPvdConnectionManager(), "127.0.0.1", 5425, 1000, true, PxGetDefaultDebuggerFlags());
+	PxExtensionVisualDebugger::connect(PhysXSDK->getPvdConnectionManager(), "167.114.32.66", 5425, 1000, true, PxGetDefaultDebuggerFlags());
 #endif
 
 	// set collision group BEFORE creating scene and cannot change after that
